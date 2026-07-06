@@ -1,4 +1,4 @@
-# 🤝 Personalized Networking Assistant
+# Personalized Networking Assistant
 
 > AI-powered conversation starters and Wikipedia fact-checking for professional networking events.
 
