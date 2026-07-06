@@ -1,0 +1,712 @@
+/*
+ * linear_orbit.css
+ * =================
+ * Linear Orbit design system for the Streamlit Networking Assistant.
+ * All token values sourced from DESIGN.md — no approximations.
+ */
+
+/* ============================================================
+   1. Design Tokens
+   ============================================================ */
+:root {
+  /* Colors */
+  --color-ink:          #0e1116;
+  --color-surface:      #ffffff;
+  --color-page:         #f5f6f8;
+  --color-hairline:     rgba(14,17,22,0.06);
+  --color-accent:       #5e6ad2;
+  --color-accent-soft:  rgba(94,106,210,0.10);
+  --color-muted-700:    #3a4150;
+  --color-muted-500:    #5a6273;
+  --color-muted-400:    #7a818f;
+  --color-muted-200:    #e6e8ec;
+
+  /* Typography */
+  --font-display:  'Inter', sans-serif;
+  --font-body:     'Inter', sans-serif;
+  --font-mono:     'JetBrains Mono', monospace;
+
+  /* Type Scale */
+  --text-hero:  3.25rem;
+  --text-h1:    2.25rem;
+  --text-h2:    1.5rem;
+  --text-h3:    1.0625rem;
+  --text-body:  0.9375rem;
+  --text-ui:    0.8125rem;
+  --text-mono:  0.75rem;
+
+  /* Radius (from DESIGN.md) */
+  --radius-sm:   5px;
+  --radius-md:   8px;
+  --radius-lg:   10px;
+  --radius-pill: 9999px;
+
+  /* Shadows (from DESIGN.md — hairline only) */
+  --shadow-card:   rgba(14,17,22,0.06) 0 0 0 1px, rgba(14,17,22,0.03) 0 1px 2px;
+  --shadow-hover:  0 0 0 1px rgba(14,17,22,0.10), 0 4px 16px rgba(14,17,22,0.06);
+  --shadow-button: rgba(94,106,210,0.18) 0 1px 0 inset, rgba(0,0,0,0.04) 0 1px 1px;
+
+  /* Borders */
+  --border-card:    1px solid rgba(14,17,22,0.06);
+  --border-divider: rgba(14,17,22,0.06);
+
+  /* Spacing (4px base) */
+  --sp-1:   4px;
+  --sp-2:   8px;
+  --sp-3:   12px;
+  --sp-4:   16px;
+  --sp-5:   20px;
+  --sp-6:   24px;
+  --sp-8:   32px;
+  --sp-12:  48px;
+  --sp-16:  64px;
+
+  /* Motion */
+  --duration-fast:     160ms;
+  --duration-base:     240ms;
+  --easing-standard:   cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================
+   2. Global Reset
+   ============================================================ */
+
+.stApp {
+  background-color: var(--color-page) !important;
+  font-family: var(--font-body) !important;
+  color: var(--color-ink) !important;
+  font-size: var(--text-body) !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Tighter top padding — reduces dead space above the hero */
+.main .block-container {
+  padding: 16px 32px 64px !important;
+  max-width: 1100px !important;
+}
+
+/* ============================================================
+   3. Hide Streamlit Chrome
+   ============================================================ */
+
+[data-testid="stSidebarNav"] { display: none !important; }
+#MainMenu  { visibility: hidden !important; }
+footer     { visibility: hidden !important; }
+header     { visibility: hidden !important; }
+
+/* ============================================================
+   4. Sidebar — Premium Settings Panel
+   ============================================================ */
+
+[data-testid="stSidebar"] {
+  background-color: var(--color-surface) !important;
+  border-right: 1px solid rgba(14,17,22,0.08) !important;
+}
+
+[data-testid="stSidebar"] > div {
+  padding: 24px 20px !important;
+}
+
+[data-testid="stSidebar"] label {
+  font-family: var(--font-body) !important;
+  font-size: var(--text-ui) !important;
+  font-weight: 500 !important;
+  color: var(--color-muted-700) !important;
+  letter-spacing: 0 !important;
+}
+
+[data-testid="stSidebar"] .stTextArea textarea,
+[data-testid="stSidebar"] .stTextInput input {
+  background-color: var(--color-page) !important;
+  border: 1px solid rgba(14,17,22,0.09) !important;
+  border-radius: var(--radius-md) !important;
+  color: var(--color-ink) !important;
+  font-family: var(--font-body) !important;
+  font-size: var(--text-ui) !important;
+  padding: 10px 12px !important;
+  transition: border-color var(--duration-fast) var(--easing-standard) !important;
+}
+
+[data-testid="stSidebar"] .stTextArea textarea:hover,
+[data-testid="stSidebar"] .stTextInput input:hover {
+  border-color: rgba(14,17,22,0.18) !important;
+}
+
+[data-testid="stSidebar"] .stTextArea textarea:focus,
+[data-testid="stSidebar"] .stTextInput input:focus {
+  background-color: var(--color-surface) !important;
+  border: 1.5px solid var(--color-ink) !important;
+  box-shadow: 0 0 0 3px rgba(14,17,22,0.06) !important;
+  outline: none !important;
+}
+
+[data-testid="stSidebar"] p,
+[data-testid="stSidebar"] span,
+[data-testid="stSidebar"] div {
+  color: var(--color-ink);
+}
+
+[data-testid="stSidebar"] hr {
+  border: none !important;
+  border-top: 1px solid rgba(14,17,22,0.06) !important;
+  margin: 20px 0 !important;
+}
+
+/* ============================================================
+   5. Tabs — Underline Style
+   ============================================================ */
+
+.stTabs [data-baseweb="tab-list"] {
+  gap: 0 !important;
+  border-bottom: 1px solid rgba(14,17,22,0.06) !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.stTabs [data-baseweb="tab"] {
+  font-family: var(--font-body) !important;
+  font-size: var(--text-ui) !important;
+  font-weight: 500 !important;
+  color: var(--color-muted-400) !important;
+  padding: 12px 16px !important;
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 2px solid transparent !important;
+  border-radius: 0 !important;
+  transition: color var(--duration-fast) var(--easing-standard),
+              background var(--duration-fast) var(--easing-standard) !important;
+  margin-bottom: -1px !important;
+}
+
+.stTabs [data-baseweb="tab"]:hover {
+  color: var(--color-ink) !important;
+  background: rgba(14,17,22,0.03) !important;
+}
+
+.stTabs [aria-selected="true"] {
+  color: var(--color-ink) !important;
+  border-bottom: 2px solid var(--color-accent) !important;
+  background: transparent !important;
+  font-weight: 600 !important;
+}
+
+.stTabs [data-baseweb="tab-panel"] {
+  padding: 24px 0 0 !important;
+  background: transparent !important;
+}
+
+/* ============================================================
+   6. Typography
+   ============================================================ */
+
+h1, h2, h3 {
+  font-family: var(--font-display) !important;
+  color: var(--color-ink) !important;
+  margin: 0 !important;
+}
+
+h1 {
+  font-size: var(--text-h1) !important;
+  font-weight: 600 !important;
+  line-height: 1.12 !important;
+  letter-spacing: -0.035em !important;
+  margin-bottom: 12px !important;
+}
+
+h2 {
+  font-size: var(--text-h2) !important;
+  font-weight: 600 !important;
+  line-height: 1.25 !important;
+  letter-spacing: -0.025em !important;
+}
+
+h3 {
+  font-size: var(--text-h3) !important;
+  font-weight: 600 !important;
+  line-height: 1.35 !important;
+  letter-spacing: -0.01em !important;
+}
+
+p {
+  font-family: var(--font-body) !important;
+  font-size: var(--text-body) !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  letter-spacing: -0.005em !important;
+  color: var(--color-ink) !important;
+}
+
+/* ============================================================
+   7. Buttons
+   ============================================================ */
+
+/* Base */
+button[kind="primary"],
+button[kind="secondary"],
+button[kind="tertiary"] {
+  border-radius: var(--radius-md) !important;
+  font-family: var(--font-body) !important;
+  font-size: var(--text-ui) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  transition: all var(--duration-fast) var(--easing-standard) !important;
+  cursor: pointer !important;
+  min-height: 36px !important;
+}
+
+button[kind="primary"]:focus-visible,
+button[kind="secondary"]:focus-visible,
+button[kind="tertiary"]:focus-visible {
+  outline: 2px solid rgba(14,17,22,0.5) !important;
+  outline-offset: 2px !important;
+}
+
+button[kind="primary"]:disabled,
+button[kind="secondary"]:disabled {
+  opacity: 0.4 !important;
+}
+
+/* Primary — indigo fill */
+button[kind="primary"] {
+  background: var(--color-accent) !important;
+  color: #ffffff !important;
+  border: none !important;
+  padding: 8px 18px !important;
+  box-shadow: var(--shadow-button) !important;
+}
+
+button[kind="primary"]:hover:not(:disabled) {
+  filter: brightness(0.94) !important;
+  box-shadow: rgba(94,106,210,0.22) 0 1px 0 inset, rgba(0,0,0,0.08) 0 2px 4px !important;
+}
+
+button[kind="primary"]:active:not(:disabled) {
+  transform: scale(0.98) !important;
+  box-shadow: rgba(0,0,0,0.08) 0 1px 2px !important;
+}
+
+/* Secondary — white + hairline */
+button[kind="secondary"] {
+  background: var(--color-surface) !important;
+  color: var(--color-ink) !important;
+  border: 1px solid rgba(14,17,22,0.10) !important;
+  padding: 8px 14px !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02) !important;
+}
+
+button[kind="secondary"]:hover:not(:disabled) {
+  border-color: rgba(14,17,22,0.20) !important;
+  background: #fafafa !important;
+}
+
+/* Ghost / Tertiary */
+button[kind="tertiary"] {
+  background: transparent !important;
+  color: var(--color-muted-500) !important;
+  border: none !important;
+  padding: 8px 12px !important;
+  box-shadow: none !important;
+}
+
+button[kind="tertiary"]:hover:not(:disabled) {
+  background: rgba(14,17,22,0.04) !important;
+  color: var(--color-ink) !important;
+}
+
+/* ============================================================
+   8. Form Inputs
+   ============================================================ */
+
+.stTextInput input,
+.stTextArea textarea {
+  background: var(--color-surface) !important;
+  border: 1px solid rgba(14,17,22,0.10) !important;
+  border-radius: var(--radius-md) !important;
+  color: var(--color-ink) !important;
+  font-family: var(--font-body) !important;
+  font-size: var(--text-body) !important;
+  font-weight: 400 !important;
+  padding: 10px 14px !important;
+  transition: border-color var(--duration-fast) var(--easing-standard),
+              box-shadow var(--duration-fast) var(--easing-standard) !important;
+}
+
+.stTextInput input:hover,
+.stTextArea textarea:hover {
+  border-color: rgba(14,17,22,0.22) !important;
+}
+
+.stTextInput input:focus,
+.stTextArea textarea:focus {
+  border: 1.5px solid var(--color-ink) !important;
+  box-shadow: 0 0 0 3px rgba(14,17,22,0.06) !important;
+  outline: none !important;
+}
+
+.stTextInput label,
+.stTextArea label,
+.stSelectbox label,
+.stSlider label {
+  font-family: var(--font-body) !important;
+  font-size: var(--text-ui) !important;
+  font-weight: 500 !important;
+  color: var(--color-muted-700) !important;
+  letter-spacing: 0 !important;
+  margin-bottom: 4px !important;
+}
+
+/* Selectbox */
+.stSelectbox > div[data-baseweb="select"] > div {
+  background: var(--color-surface) !important;
+  border: 1px solid rgba(14,17,22,0.10) !important;
+  border-radius: var(--radius-md) !important;
+  font-size: var(--text-ui) !important;
+  font-family: var(--font-body) !important;
+}
+
+/* ============================================================
+   9. Slider
+   ============================================================ */
+
+.stSlider [data-baseweb="slider"] [data-testid="stSliderThumb"] {
+  background: var(--color-accent) !important;
+  border: 2px solid var(--color-surface) !important;
+  width: 18px !important;
+  height: 18px !important;
+  box-shadow: 0 0 0 1px rgba(94,106,210,0.25) !important;
+}
+
+.stSlider [data-baseweb="slider"] [role="progressbar"] {
+  background: var(--color-accent) !important;
+}
+
+/* ============================================================
+   10. Cards — Bordered Streamlit containers
+   ============================================================ */
+
+/* st.container(border=True) — the main card wrapper */
+[data-testid="stVerticalBlockBorderWrapper"] {
+  background: var(--color-surface) !important;
+  border: 1px solid rgba(14,17,22,0.07) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: 0 1px 3px rgba(14,17,22,0.04), 0 0 0 1px rgba(14,17,22,0.06) !important;
+  transition: box-shadow var(--duration-base) var(--easing-standard) !important;
+  padding: 24px !important;
+}
+
+[data-testid="stVerticalBlockBorderWrapper"]:hover {
+  box-shadow: 0 0 0 1px rgba(14,17,22,0.10), 0 4px 16px rgba(14,17,22,0.06) !important;
+}
+
+/* ============================================================
+   11. HTML Card classes (injected via st.markdown)
+   ============================================================ */
+
+.lo-card {
+  background: var(--color-surface);
+  border: 1px solid rgba(14,17,22,0.07);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  box-shadow: 0 1px 3px rgba(14,17,22,0.04), 0 0 0 1px rgba(14,17,22,0.06);
+  margin-bottom: 12px;
+  transition: box-shadow var(--duration-base) var(--easing-standard);
+}
+
+.lo-card:hover {
+  box-shadow: 0 0 0 1px rgba(14,17,22,0.10), 0 4px 16px rgba(14,17,22,0.06);
+}
+
+.lo-card-compact {
+  background: var(--color-surface);
+  border: 1px solid rgba(14,17,22,0.07);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  box-shadow: 0 1px 2px rgba(14,17,22,0.03), 0 0 0 1px rgba(14,17,22,0.05);
+  margin-bottom: 10px;
+}
+
+.lo-fact-card {
+  background: var(--color-surface);
+  border: 1px solid rgba(14,17,22,0.07);
+  border-left: 3px solid var(--color-accent);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  box-shadow: 0 1px 3px rgba(14,17,22,0.04), 0 0 0 1px rgba(14,17,22,0.06);
+  margin-bottom: 14px;
+}
+
+.lo-card-error {
+  background: rgba(220,38,38,0.03);
+  border: 1px solid rgba(220,38,38,0.14);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  margin-bottom: 16px;
+}
+
+.lo-card-info {
+  background: rgba(94,106,210,0.06);
+  border: 1px solid rgba(94,106,210,0.14);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  margin-bottom: 16px;
+}
+
+/* ============================================================
+   12. Metric / KPI Cards (HTML-rendered)
+   ============================================================ */
+
+.lo-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.lo-metric-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.lo-metric-card {
+  background: var(--color-surface);
+  border: 1px solid rgba(14,17,22,0.07);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  box-shadow: 0 1px 3px rgba(14,17,22,0.04), 0 0 0 1px rgba(14,17,22,0.06);
+}
+
+.lo-metric-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7a818f;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.lo-metric-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: #0e1116;
+  line-height: 1;
+  display: block;
+}
+
+/* ============================================================
+   13. Badges
+   ============================================================ */
+
+.lo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono) !important;
+  font-size: 0.6875rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  padding: 2px 8px !important;
+  border-radius: var(--radius-sm) !important;
+  line-height: 1.5 !important;
+}
+
+.lo-badge-found {
+  background: rgba(34,197,94,0.08) !important;
+  color: #15803d !important;
+  border: 1px solid rgba(34,197,94,0.16) !important;
+}
+
+.lo-badge-not-found {
+  background: rgba(220,38,38,0.06) !important;
+  color: #b91c1c !important;
+  border: 1px solid rgba(220,38,38,0.14) !important;
+}
+
+.lo-badge-theme {
+  background: rgba(94,106,210,0.08) !important;
+  color: var(--color-accent) !important;
+  border: 1px solid rgba(94,106,210,0.14) !important;
+  margin-right: 4px !important;
+  margin-bottom: 4px !important;
+}
+
+/* ============================================================
+   14. Hero Section
+   ============================================================ */
+
+.lo-hero {
+  padding: 8px 0 24px 0;
+  border-bottom: 1px solid rgba(14,17,22,0.06);
+  margin-bottom: 28px;
+}
+
+.lo-eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 10px;
+}
+
+.lo-hero-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--color-ink);
+  line-height: 1.12;
+  margin-bottom: 10px;
+}
+
+.lo-hero-sub {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--color-muted-500);
+  line-height: 1.6;
+  max-width: 68ch;
+  margin: 0;
+}
+
+/* ============================================================
+   15. Expander
+   ============================================================ */
+
+[data-testid="stExpander"] {
+  border: 1px solid rgba(14,17,22,0.07) !important;
+  border-radius: var(--radius-md) !important;
+  background: var(--color-surface) !important;
+  box-shadow: 0 1px 2px rgba(14,17,22,0.03) !important;
+  margin-bottom: 10px !important;
+  overflow: hidden !important;
+}
+
+.streamlit-expanderHeader {
+  font-family: var(--font-body) !important;
+  font-size: var(--text-ui) !important;
+  font-weight: 500 !important;
+  color: var(--color-ink) !important;
+  background: var(--color-surface) !important;
+  padding: 14px 16px !important;
+}
+
+.streamlit-expanderHeader:hover {
+  background: rgba(14,17,22,0.02) !important;
+}
+
+/* ============================================================
+   16. Dividers
+   ============================================================ */
+
+hr, .lo-divider {
+  border: none !important;
+  border-top: 1px solid rgba(14,17,22,0.06) !important;
+  margin: 24px 0 !important;
+}
+
+/* ============================================================
+   17. Alert Boxes
+   ============================================================ */
+
+.stAlert {
+  border-radius: var(--radius-md) !important;
+  font-family: var(--font-body) !important;
+  font-size: var(--text-body) !important;
+  border: 1px solid transparent !important;
+}
+
+/* ============================================================
+   18. Spinner
+   ============================================================ */
+
+.stSpinner > div {
+  border-top-color: var(--color-accent) !important;
+}
+
+/* ============================================================
+   19. Code
+   ============================================================ */
+
+code {
+  font-family: var(--font-mono) !important;
+  font-size: 0.8125rem !important;
+  background: rgba(14,17,22,0.05) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 2px 6px !important;
+  color: var(--color-ink) !important;
+}
+
+/* ============================================================
+   20. Scrollbar
+   ============================================================ */
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--color-muted-200);
+  border-radius: var(--radius-pill);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-muted-400); }
+
+/* ============================================================
+   21. Utility spacers
+   ============================================================ */
+
+.lo-spacer-xs  { margin-top: 8px; }
+.lo-spacer-sm  { margin-top: 16px; }
+.lo-spacer-md  { margin-top: 24px; }
+.lo-spacer-lg  { margin-top: 40px; }
+
+.lo-muted {
+  color: var(--color-muted-500) !important;
+  font-size: var(--text-body) !important;
+}
+
+.lo-mono {
+  font-family: var(--font-mono) !important;
+  font-size: var(--text-mono) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  color: var(--color-muted-400) !important;
+}
+
+/* ============================================================
+   22. st.metric override (backup — CSS-based)
+   ============================================================ */
+
+[data-testid="metric-container"] {
+  background: var(--color-surface) !important;
+  border: 1px solid rgba(14,17,22,0.07) !important;
+  border-radius: var(--radius-lg) !important;
+  padding: 20px 24px !important;
+  box-shadow: 0 1px 3px rgba(14,17,22,0.04), 0 0 0 1px rgba(14,17,22,0.06) !important;
+}
+
+[data-testid="stMetricValue"] {
+  font-family: var(--font-mono) !important;
+  font-size: 2rem !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--color-ink) !important;
+  line-height: 1 !important;
+}
+
+[data-testid="stMetricLabel"] {
+  font-family: var(--font-mono) !important;
+  font-size: 0.625rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--color-muted-400) !important;
+}
